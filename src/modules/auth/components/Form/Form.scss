@@ -1,0 +1,91 @@
+
+// login item
+.form-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.form-item.check-box {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    label {
+        margin-bottom: 0;
+        margin-left: 8px;
+    }
+}
+.form-label {
+    margin-bottom: 8px;
+}
+.form-control {
+    display: flex;
+    align-items: center;
+    min-height: 24px;
+    border-radius: 4px;
+    border:1px solid var(--border-color-1);
+    padding: 4px 8px;
+
+    .form-input {
+        flex: 1;
+        outline: none;
+        border: none;
+    }
+    .form-input-btn {
+        cursor: pointer;
+    }
+
+    &:hover {
+        border-color: var(--border-color-1-hover); 
+    }
+    &:focus-within {
+        border-color: var(--border-color-1-focus); 
+        box-shadow: 2px 2px 4px #c3c3c3;
+    }
+}
+.form-control.form-item-valid {
+    border-color: var(--err-color);
+    &:focus-within {
+        border-color: var(--border-color-1-focus); 
+    }
+}
+// form input button
+.form-input-icon {
+    color: var(--border-color-1);
+    &:hover {
+        color: var(--border-color-1-hover);
+    }
+}
+.form-error-wrap {
+    min-height: 21px;
+}
+.form-error {
+    display: block;
+    color: var(--err-color);
+    animation: fadeTopToBot 0.3s ease-in;
+}
+
+// form-submit
+.form-submit {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+
+    .form-btn {
+        min-width: 110px;
+        padding: 8px 16px;
+        font-size: 16px;
+        border-radius: 4px;
+        color: var(--white-color);
+        background-color: var(--primary-color);
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+.loading {
+    animation: spinner 1s ease-in;
+}

@@ -1,0 +1,33 @@
+// login page
+.register-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh
+}
+
+// logo
+.logo {
+    margin: 32px;
+    height: var(--height-logo);
+
+    .logo-1 {
+        height: 100%;
+        animation: fadeRightToLeft 0.4s ease-in;
+    }
+    .logo-2 {
+        height: 100%;
+        animation: fadeLeftToRight 0.4s ease-out;
+    }
+}
+
+.form-register {
+    max-width: 560px;
+    width: 100%;
+    padding: 16px;
+    border: 1px solid var(--border-color-1);
+    border-radius: 4px;
+    box-shadow: 1px 1px 5px #525252;
+}
