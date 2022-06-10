@@ -72,7 +72,7 @@ const Signup = () => {
       setLoading(true);
 
       const json = await dispatch(
-        fetchThunk(API_PATHS.signIn, 'post', value),
+        fetchThunk(API_PATHS.signUp, 'post', value),
       );
 
       console.log(json);
@@ -89,7 +89,7 @@ const Signup = () => {
         setErrMessages(getErrorMessageResponse(json));
         setTimeout(()=>{
           setErrMessages('');
-        },1500);
+        },3000);
       }
       
     },
