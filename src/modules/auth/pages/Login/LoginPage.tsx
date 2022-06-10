@@ -75,11 +75,13 @@ const LoginPage = () => {
         <img className="logo-2" src={logo2} alt="logo-2" />
       </div>
 
-      <LoginForm onLogin={onLogin} loading={loading} errMessages={errMessages}/>
-      
-      <a href="/sign-up">
-        <FormattedMessage id="register" />
-      </a>
+      <div className="register-form-container">
+        <LoginForm onLogin={onLogin} loading={loading} errMessages={errMessages}/>
+        
+        <a href="/sign-up">
+          <FormattedMessage id="register" />
+        </a>
+      </div>
     </div>
   )
 }

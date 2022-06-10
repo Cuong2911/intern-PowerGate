@@ -5,6 +5,7 @@ import { validateSignup, validSignup } from '../../utils';
 import FormItem from '../Form/FormItem';
 import FormItemSelect from '../Form/FormItemSelect';
 import FormSubmit from '../Form/FormSubmit';
+import ToastMessage from '../Toast/ToastMessage';
 
 
 interface Props {
@@ -93,7 +94,7 @@ const SignupForm = (props: Props) => {
 
   const renderGender = () => {
     const arrRender: JSX.Element[] = [
-      <option disabled selected value={''} key={''}>
+      <option disabled  value={''} key={''}>
         --select an option--
       </option>,
     ];
@@ -109,7 +110,7 @@ const SignupForm = (props: Props) => {
 
   const renderRegion = () => {
     const arrRender: JSX.Element[] = [
-      <option disabled selected value={''} key={''}>
+      <option disabled  value={''} key={''}>
         --select an option--
       </option>,
     ];
@@ -125,7 +126,7 @@ const SignupForm = (props: Props) => {
 
   const renderState = () => {
     const arrRender: JSX.Element[] = [
-      <option disabled selected value={''} key={''}>
+      <option disabled  value={''} key={''}>
         --select an option--
       </option>,
     ];
@@ -140,72 +141,90 @@ const SignupForm = (props: Props) => {
     return arrRender
   };
 
+  const LoginToast = {
+    fail : 'Invalid username / password',
+    success : 'Signup Success',
+  }
   return (
-    <form className="form-register">
-      <FormItem
-        label={'email'}
-        placeholder='Nhập email ...'
-        formValues={formValues.email} 
-        onChangeValue={onChangeFormValue.email}
-        validate={validate?.email}
-      />
-      <FormItem 
-        type={'password'}
-        label={'password'}
-        placeholder='Nhập mật khẩu ...'
-        formValues={formValues.password} 
-        onChangeValue={onChangeFormValue.password}
-        validate={validate?.password}
-      />
-      <FormItem 
-        type={'password'}
-        label={'repeatPassword'}
-        placeholder='Nhập lại mật khẩu ...'
-        formValues={formValues.repeatPassword} 
-        onChangeValue={onChangeFormValue.repeatPassword}
-        validate={validate?.repeatPassword}
-      />
-      <FormItem
-        label={'name'}
-        placeholder='Nhập họ và tên ...'
-        formValues={formValues.name} 
-        onChangeValue={onChangeFormValue.name}
-        validate={validate?.name}
-      />
-      <FormItemSelect
-        label={'gender'}
-        formValues={formValues.gender} 
-        onChangeValue={onChangeFormValue.gender}
-        validate={validate?.gender}
-      >
-        {renderGender()}
-      </FormItemSelect>
-      <FormItemSelect
-        label={'region'}
-        formValues={formValues.region} 
-        onChangeValue={onChangeFormValue.region}
-        validate={validate?.region}
-      >
-        {renderRegion()}
-      </FormItemSelect>
-      { states.length > 0 &&
-        <FormItemSelect
-          label={'state'}
-          formValues={formValues.state} 
-          onChangeValue={onChangeFormValue.state}
-          validate={validate?.state}
-        >
-          {renderState()}
-        </FormItemSelect>
+
+    <>
+      {
+        (errMessages !== LoginToast.success) && 
+        !!errMessages &&
+        <ToastMessage type="fail" text={errMessages}/>
       }
-
-
-      <FormSubmit 
-        label="register"
-        onSubmit={onSubmit}
-        loading={loading}
-      />
-    </form>
+      {
+        (errMessages === LoginToast.success) &&
+        <ToastMessage type="success" text={errMessages}/>
+      }
+      <form className="form-register">
+        <div className="form-item-list">
+          <FormItem
+            label={'email'}
+            placeholder='Nhập email ...'
+            formValues={formValues.email} 
+            onChangeValue={onChangeFormValue.email}
+            validate={validate?.email}
+          />
+          <FormItem 
+            type={'password'}
+            label={'password'}
+            placeholder='Nhập mật khẩu ...'
+            formValues={formValues.password} 
+            onChangeValue={onChangeFormValue.password}
+            validate={validate?.password}
+          />
+          <FormItem 
+            type={'password'}
+            label={'repeatPassword'}
+            placeholder='Nhập lại mật khẩu ...'
+            formValues={formValues.repeatPassword} 
+            onChangeValue={onChangeFormValue.repeatPassword}
+            validate={validate?.repeatPassword}
+          />
+          <FormItem
+            label={'name'}
+            placeholder='Nhập họ và tên ...'
+            formValues={formValues.name} 
+            onChangeValue={onChangeFormValue.name}
+            validate={validate?.name}
+          />
+          <FormItemSelect
+            label={'gender'}
+            formValues={formValues.gender} 
+            onChangeValue={onChangeFormValue.gender}
+            validate={validate?.gender}
+          >
+            {renderGender()}
+          </FormItemSelect>
+          <FormItemSelect
+            label={'region'}
+            formValues={formValues.region} 
+            onChangeValue={onChangeFormValue.region}
+            validate={validate?.region}
+          >
+            {renderRegion()}
+          </FormItemSelect>
+          { states.length > 0 &&
+            <FormItemSelect
+              label={'state'}
+              formValues={formValues.state} 
+              onChangeValue={onChangeFormValue.state}
+              validate={validate?.state}
+            >
+              {renderState()}
+            </FormItemSelect>
+          }
+        </div>
+  
+  
+        <FormSubmit 
+          label="register"
+          onSubmit={onSubmit}
+          loading={loading}
+        />
+      </form>
+    </>
   )
 }
 

@@ -9,6 +9,7 @@
     animation: fadeRightToLeft 0.3s ease-in-out;
     min-height: 60px;
     padding: 6px 12px;
+    background-color: #fff;
 }
 .toast.fail {
     border-left: 3px solid var(--err-color);

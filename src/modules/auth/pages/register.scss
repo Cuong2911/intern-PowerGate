@@ -4,8 +4,17 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    flex-wrap: wrap;
     width: 100vw;
-    height: 100vh
+    height: 100vh;
+}
+.register-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 560px;
+    width: 100%;
 }
 
 // logo
@@ -24,7 +33,10 @@
 }
 
 .form-register {
+    display: flex;
+    flex-direction: column;
     max-width: 560px;
+    max-height: 90vh;
     width: 100%;
     padding: 16px;
     border: 1px solid var(--border-color-1);

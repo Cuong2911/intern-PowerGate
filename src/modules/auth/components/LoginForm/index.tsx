@@ -94,7 +94,7 @@ const LoginForm = (props: Props) => {
         </div>
   
         <FormSubmit 
-          label="register"
+          label="login"
           onSubmit={onSubmit}
           loading={loading}
         />

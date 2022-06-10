@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { FormattedMessage } from 'react-intl';
+import { replace } from 'connected-react-router';
 
 import SignupForm from '../../components/SignupForm'
 import '../register.scss'
@@ -12,6 +13,9 @@ import { AppState } from '../../../../redux/reducer'
 import { fetchThunk } from '../../../common/redux/thunk';
 import { API_PATHS } from '../../../../configs/api';
 import { RESPONSE_STATUS_SUCCESS } from '../../../../utils/httpResponseCode';
+import { ISignupParams } from '../../../../models/auth';
+import { ROUTES } from '../../../../configs/routes';
+import { getErrorMessageResponse } from '../../../../utils';
 
 const Signup = () => {  
 
@@ -63,32 +67,58 @@ const Signup = () => {
    );
 
   const onSignup = React.useCallback(
-    () => {
-      console.log('dang ky');      
+    async (value: ISignupParams) => {
+      setErrMessages('');
+      setLoading(true);
+
+      const json = await dispatch(
+        fetchThunk(API_PATHS.signIn, 'post', value),
+      );
+
+      console.log(json);
+      
+      setLoading(false);
+      
+      if(json?.code === RESPONSE_STATUS_SUCCESS) {
+        setErrMessages('Signup Success')
+        setTimeout(() => {
+          dispatch(replace(ROUTES.login));
+        },1500)
+        return;
+      } else {
+        setErrMessages(getErrorMessageResponse(json));
+        setTimeout(()=>{
+          setErrMessages('');
+        },1500);
+      }
+      
     },
-    []
+    [dispatch]
   );
 
+  
   return (
-    <div className="register-page">
+    <div className="register-page f-row">
 
       <div className="logo">
         <img className="logo-1" src={logo1} alt="logo-1" />
         <img className="logo-2" src={logo2} alt="logo-2" />
       </div>
 
-      <SignupForm 
-        onSignup={onSignup} 
-        loading={loading} 
-        errMessages={errMessages}
-        regions={regions}
-        states={states}
-        getStates={getStates}
-      />
-
-      <a href="/login">
-        <FormattedMessage id="login" />
-      </a>
+      <div className="register-form-container">
+        <SignupForm 
+          onSignup={onSignup} 
+          loading={loading} 
+          errMessages={errMessages}
+          regions={regions}
+          states={states}
+          getStates={getStates}
+        />
+  
+        <a href="/login">
+          <FormattedMessage id="login" />
+        </a>
+      </div>
     </div>
   )
 }
